@@ -3,9 +3,12 @@
   <PropertyGroup>
     <TargetFramework>net6.0</TargetFramework>
     <RootNamespace>RegExTester.Api.DotNet</RootNamespace>
+    <ApplicationInsightsResourceId>/subscriptions/6683f4db-c298-4a7b-974f-e82f216386d7/resourceGroups/regex-tester/providers/microsoft.insights/components/regex-tester-api-dotnet</ApplicationInsightsResourceId>
+    <UserSecretsId>10101463-b4f1-4d65-941d-ca7a34cca54e</UserSecretsId>
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Microsoft.ApplicationInsights.AspNetCore" Version="2.15.0" />
     <PackageReference Include="Microsoft.Extensions.PlatformAbstractions" Version="1.1.0" />
     <PackageReference Include="Newtonsoft.Json" Version="12.0.3" />
   </ItemGroup>

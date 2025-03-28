@@ -3,7 +3,6 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Newtonsoft.Json;
 using RegExTester.Api.DotNet.Services;
 
 namespace RegExTester.Api.DotNet
@@ -25,7 +24,7 @@ namespace RegExTester.Api.DotNet
 
             services.AddMvc().AddJsonOptions(options =>
             {
-                options.JsonSerializerOptions.IgnoreNullValues = true;
+                options.JsonSerializerOptions.DefaultIgnoreCondition = System.Text.Json.Serialization.JsonIgnoreCondition.WhenWritingNull;
             });
 
             services.AddTransient<IRegExProcessor, RegExProcessor>();

@@ -1,9 +1,11 @@
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http.Timeouts;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using RegExTester.Api.DotNet.Services;
+using System;
 
 namespace RegExTester.Api.DotNet
 {
@@ -19,6 +21,11 @@ namespace RegExTester.Api.DotNet
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddResponseCaching();
+            services.AddRequestTimeouts(options =>
+            {
+                options.DefaultPolicy = new RequestTimeoutPolicy { Timeout = TimeSpan.FromSeconds(5) };
+            });
             services.AddControllers();
             services.AddCors();
 
@@ -47,10 +54,12 @@ namespace RegExTester.Api.DotNet
                     .AllowAnyOrigin()
                     #endif
             );
+            app.UseResponseCaching();
 
             app.UseHttpsRedirection();
 
             app.UseRouting();
+            app.UseRequestTimeouts();
 
             app.UseAuthorization();
 

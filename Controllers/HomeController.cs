@@ -16,6 +16,7 @@ namespace RegExTester.Api.DotNet.Controllers
         // GET api/version
         [HttpGet]
         [Route("/api/version")]
+        [ResponseCache(Duration = 60*60*24)] // 1d
         public ActionResult Version()
         {
             return Json(new {

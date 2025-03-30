@@ -35,6 +35,9 @@ namespace RegExTester.Api.DotNet
             });
 
             services.AddTransient<IRegExProcessor, RegExProcessor>();
+            services.AddSingleton<ITelemetryService>(
+                new TelemetryService(Configuration["Cosmos:ConnectionString"], Configuration["Cosmos:Database"], Configuration["Cosmos:Container"])
+            );
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

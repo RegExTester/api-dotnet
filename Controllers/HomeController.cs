@@ -1,6 +1,5 @@
-using System;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.PlatformAbstractions;
+using System.Runtime.InteropServices;
 
 namespace RegExTester.Api.DotNet.Controllers
 {
@@ -23,9 +22,8 @@ namespace RegExTester.Api.DotNet.Controllers
                 #if DEBUG
                 debug = 1,
                 #endif
-                os = Environment.OSVersion.VersionString,
-                platform = Environment.OSVersion.Platform.ToString(),
-                framework = PlatformServices.Default.Application.RuntimeFramework.FullName
+                os = RuntimeInformation.OSDescription,
+                framework = RuntimeInformation.FrameworkDescription
             });
         }
     }

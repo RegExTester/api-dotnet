@@ -1,19 +1,22 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using System.Text;
-using System.Text.RegularExpressions;
 using Microsoft.AspNetCore.Mvc;
-using Newtonsoft.Json;
 using RegExTester.Api.DotNet.Models;
 using RegExTester.Api.DotNet.Services;
+using System.Diagnostics;
+using System.Text.Encodings.Web;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 
 namespace RegExTester.Api.DotNet.Controllers
 {
     [Route("api/regex")]
     public class RegExController : Controller
     {
+        private static readonly JsonSerializerOptions JsonOptions = new JsonSerializerOptions
+        {
+            Encoder = JavaScriptEncoder.UnsafeRelaxedJsonEscaping,
+            Converters = { new JsonStringEnumConverter() }
+        };
+
         public IRegExProcessor RegExProcessor { get; set; }
 
         public RegExController(IRegExProcessor regExProcessor)
@@ -25,7 +28,8 @@ namespace RegExTester.Api.DotNet.Controllers
         [HttpPost]
         public ActionResult Post([FromBody] Input model)
         {
-            var processor = new RegExProcessor();
+            Activity.Current?.AddTag(nameof(model), JsonSerializer.Serialize(model, JsonOptions));
+
             var result = RegExProcessor.Matches(model.Pattern, model.Text, model.Replace, model.Options);
             return Json(result);
         }

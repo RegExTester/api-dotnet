@@ -1,6 +1,5 @@
 using System;
 using System.Collections.Generic;
-using System.Text;
 using System.Text.RegularExpressions;
 using RegExTester.Api.DotNet.Models;
 
@@ -13,6 +12,8 @@ namespace RegExTester.Api.DotNet.Services
 
     public class RegExProcessor : IRegExProcessor
     {
+        static readonly TimeSpan RegexMatchTimeout = TimeSpan.FromSeconds(15);
+
         public dynamic Matches(string pattern, string text, string replace, RegExTesterOptions options)
         {
             string error = null;
@@ -23,7 +24,7 @@ namespace RegExTester.Api.DotNet.Services
             {
                 var showCaptures = options.HasFlag(RegExTesterOptions.ShowCaptures);
                 var regexOptions = showCaptures ? (RegexOptions)(options - RegExTesterOptions.ShowCaptures) : (RegexOptions)options;
-                var regex = new Regex(pattern, regexOptions);
+                var regex = new Regex(pattern, regexOptions, RegexMatchTimeout);
                 var matches = regex.Matches(text);
 
                 foreach (Match match in matches)

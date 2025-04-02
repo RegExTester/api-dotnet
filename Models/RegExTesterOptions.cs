@@ -16,6 +16,7 @@ namespace RegExTester.Api.DotNet.Models
         RightToLeft = RegexOptions.RightToLeft,                             // 0b0000_0000_0100_0000 = 64
         ECMAScript = RegexOptions.ECMAScript,                               // 0b0000_0001_0000_0000 = 256
         CultureInvariant = RegexOptions.CultureInvariant,                   // 0b0000_0010_0000_0000 = 512
+        NonBacktracking = RegexOptions.NonBacktracking,                     // 0b0000_0100_0000_0000 = 1024
         ShowCaptures = 1 << 15                                              // 0b1000_0000_0000_0000 = 32768
     }
 }

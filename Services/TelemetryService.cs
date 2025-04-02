@@ -17,9 +17,9 @@ public class TelemetryService : ITelemetryService, IDisposable
 {
     public static ItemRequestOptions ItemRequestOptions = new ItemRequestOptions { EnableContentResponseOnWrite = false };
 
-    public static CosmosClient? CosmosClient { get; private set; }
-    public static Database? CosmosDatabase { get; private set; }
-    public static Container? CosmosContainer { get; private set; }
+    public static CosmosClient CosmosClient { get; private set; }
+    public static Database CosmosDatabase { get; private set; }
+    public static Container CosmosContainer { get; private set; }
 
     public TelemetryService(string cosmosConnectionString, string database, string container)
     {

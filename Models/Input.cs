@@ -6,13 +6,13 @@ namespace RegExTester.Api.DotNet.Models
     {
         public RegExTesterOptions Options { get; set; }
 
-        [MaxLength(100*1024)] // 100KB
+        [StringLength(512)]
         public string Pattern { get; set; }
 
-        [MaxLength(100 * 1024)] // 100KB
+        [StringLength(1024)]
         public string Text { get; set; }
 
-        [MaxLength(100 * 1024)] // 100KB
+        [StringLength(1024)]
         public string Replace { get; set; }
     }
 }

@@ -1,7 +1,7 @@
 <Project Sdk="Microsoft.NET.Sdk.Web">
 
   <PropertyGroup>
-    <TargetFramework>net8.0</TargetFramework>
+    <TargetFramework>net10.0</TargetFramework>
     <RootNamespace>RegExTester.Api.DotNet</RootNamespace>
     <UserSecretsId>10101463-b4f1-4d65-941d-ca7a34cca54e</UserSecretsId>
   </PropertyGroup>
